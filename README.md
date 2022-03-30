@@ -10,11 +10,11 @@ Simple docker wrapper around the Kines CLI to access AWS Kineses streams via CLI
 * You have Docker installed
 * You have configured your AWS access
 
-  * `aws configure`
+   `aws configure`
 
 ## Build
 
-```docker build . -t flurdy/kines-docker```
+`docker build . -t flurdy/kines-docker`
 
 
 
@@ -22,7 +22,18 @@ Simple docker wrapper around the Kines CLI to access AWS Kineses streams via CLI
 
 You need to mount your AWS credentials as a volume.
 
-```docker run -v ~/.aws:/.aws flurdy/kines-docker:latest```
+`docker run -it -v ~/.aws:/root/.aws flurdy/kines-docker:latest`
+
+## Convenience
+
+You can alias this for simpler access. E.g. in [fish](https://fishshell.com):
+
+* Add these to `~/.config/fish/functions/kines.fish`
+```
+function kines
+    command docker run --rm -i -v ~/.aws:/root/.aws flurdy/kines-docker $argv
+end
+```
 
 ## Maintainer
 
